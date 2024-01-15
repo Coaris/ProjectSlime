@@ -38,6 +38,7 @@ namespace CoarisPlatformer2D {
                         CheckCollisions();
 
                         HandleJump();
+                        HandleHorizontal();
                         HandleGravity();
 
                         ApplyMovement();
@@ -125,7 +126,25 @@ namespace CoarisPlatformer2D {
                 #endregion
 
                 #region 水平运动 Horizontal
+                
+                Vector2 _frameMoveInput;
+                float _deceleration;
 
+                void HandleHorizontal() {
+                        //当玩家没有水平输入时
+                        if (_frameMoveInput.x == 0) {
+                                _deceleration = _grounded ? _data.groundDeceleration : _data.airDeceleration;
+                                _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, 0, _deceleration * Time.fixedDeltaTime);
+                        }
+                        //当玩家有水平输入时
+                        else {
+                                _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameMoveInput.x * _data.maxSpeed, _data.acceleration * Time.fixedDeltaTime);
+                        }
+                }
+                //InputSystem 水平输入
+                public void OnMove(InputAction.CallbackContext context) {
+                        _frameMoveInput = context.ReadValue<Vector2>();
+                }
 
 
                 #endregion

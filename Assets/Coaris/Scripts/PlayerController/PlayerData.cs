@@ -38,5 +38,14 @@ namespace CoarisPlatformer2D {
                 [Header("Horizontal")]
                 [Tooltip("水平运动的最大速度，建议值14 The top horizontal speed")]
                 public float maxSpeed = 14f;
+
+                [Tooltip("水平运动的加速的加速度，建议值 马力欧120 蔚蓝200 The player's capacity to gain horizontal speed")]
+                public float acceleration = 200f;
+
+                [Tooltip("地面水平运动减速的加速度，建议值 马力欧60 蔚蓝200 The pace at which the player comes to a stop")]
+                public float groundDeceleration = 200f;
+
+                [Tooltip("空中水平运动减速的加速度，建议值 马力欧30 蔚蓝200 Deceleration in air only after stopping input mid-air")]
+                public float airDeceleration = 200f;
         }
 }
