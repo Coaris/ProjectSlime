@@ -25,6 +25,9 @@ namespace CoarisPlatformer2D {
                 [Tooltip("跳跃缓冲，在到达平台前的这段时间内，如果玩家按下跳跃键，则允许角色在落地之后立刻起跳，建议值0.12f The amount of time we buffer a jump. This allows jump input before actually hitting the ground")]
                 public float bufferJumpTime = 0.12f;
 
+                [Tooltip("土狼时间，在离开平台后的这段时间内，如果玩家按下跳跃键，则仍视为有效跳跃，建议值0.12f The time before coyote jump becomes unusabel")]
+                public float coyoteTime = 0.12f;
+
                 [Header("CollisionCheck")]
                 [Tooltip("地面与天花板的LayerMask")]
                 public LayerMask groundLayerMask;

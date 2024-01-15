@@ -63,10 +63,12 @@ namespace CoarisPlatformer2D {
                         if (!_grounded && _groundHit) {
                                 _grounded = true;
                                 _endJumpEarly = false;
+                                _coyoteUsable = true;
                         }
                         //离开地面
                         else if (_grounded && !_groundHit) {
                                 _grounded = false;
+                                _timeLeftGround = _time;
                         }
 
                         Physics2D.queriesStartInColliders = _cachedQueriesStartInColliders;
@@ -80,20 +82,25 @@ namespace CoarisPlatformer2D {
 
                 bool _jumpPressed = false;//跳跃按键是否被按下触发。当玩家按下跳跃键的瞬间为true。当角色执行一次起跳后，立刻回归false。
                 float _timeJumpPressed;//玩家按下跳跃键的游戏时间，用于计算 BufferJump 和 CoyoteJump 是否触发。
+                float _timeLeftGround = float.MinValue;//角色离开平台的游戏时间，用于CoyoteJump触发的计算。
                 bool _jumpHolding = false;//跳跃按键是否持续被按住。当玩家按下跳跃键瞬间为true。当玩家松开跳跃键瞬间回归false。
 
+                bool _coyoteUsable = false;//土狼跳是否可用。当玩家接触到地面后为true。当玩家执行一次跳跃后为false。
+
                 bool _hasBufferJump => _grounded && _time < _timeJumpPressed + _data.bufferJumpTime;//是否触发了BufferJump。触发时为true。
+                bool _hasCoyoteJump => _coyoteUsable && !_grounded && _time < _timeLeftGround + _data.coyoteTime;
 
                 //跳跃预处理，包括土狼时间等等
                 void HandleJump() {
                         if (!_endJumpEarly && !_grounded && !_jumpHolding && _rb.velocity.y > 0) _endJumpEarly = true;//在满足这些条件时，提前松开跳跃键，触发矮跳
 
-                        if (!_jumpPressed || !_hasBufferJump) return;
-                        if (_grounded) ExecuteJump();
+                        if (!_jumpPressed && !_hasBufferJump) return;
+                        if (_grounded || _hasCoyoteJump) ExecuteJump();
                         _jumpPressed = false;
                 }
                 //执行跳跃
                 void ExecuteJump() {
+                        _coyoteUsable = false;
                         _endJumpEarly = false;
                         _frameVelocity.y = _data.jumpPower;
                 }
@@ -127,7 +134,7 @@ namespace CoarisPlatformer2D {
 
                 #region 水平运动 Horizontal
 
-                
+
                 Vector2 _frameMoveInput;
                 float _deceleration;
 
