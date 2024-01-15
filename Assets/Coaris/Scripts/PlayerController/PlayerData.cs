@@ -3,40 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace CoarisPlatformer2D {
-        [CreateAssetMenu(menuName = "PlayerData")]//¿ÉÒÔÔÚ±à¼­Æ÷ÖĞ´´½¨PlayerDataµÄÔ¤ÉèÌå
+        [CreateAssetMenu(menuName = "PlayerData")]//å¯ä»¥åœ¨ç¼–è¾‘å™¨ä¸­åˆ›å»ºPlayerDataçš„é¢„è®¾ä½“
         public class PlayerData : ScriptableObject {
                 [Header("Gravity")]
-                [Tooltip("Íæ¼ÒµÄ¿ÕÖĞµÄÏÂ½µµÄ»ù´¡¼ÓËÙ¶È£¬½¨ÒéÖµ110 The player's capacity to gain fall speed")]
+                [Tooltip("ç©å®¶çš„ç©ºä¸­çš„ä¸‹é™çš„åŸºç¡€åŠ é€Ÿåº¦ï¼Œå»ºè®®å€¼110 The player's capacity to gain fall speed")]
                 public float fallAcceleration = 110f;
 
-                [Tooltip("Íæ¼ÒÌáÇ°ËÉ¿ªÌøÔ¾¼üÊ±£¬Ê©¼ÓµÄÖØÁ¦±¶Ôö£¬½¨ÒéÖµ3 The gravity multiplier added when jump is released early")]
+                [Tooltip("ç©å®¶æå‰æ¾å¼€è·³è·ƒé”®æ—¶ï¼Œæ–½åŠ çš„é‡åŠ›å€å¢ï¼Œå»ºè®®å€¼3 The gravity multiplier added when jump is released early")]
                 public float jumpEndEarlyGravityMuldifier = 3f;
 
-                [Tooltip("Íæ¼ÒÔÚµØÃæÉÏÊ±µÄÖØÁ¦£¬Ö÷ÒªÓÃÓÚĞ±ÆÂ£¬½¨ÒéÖµ-1.5 A constant downward velocity applied while grounded. Helps on slopes"), Range(0, -10f)]
+                [Tooltip("ç©å®¶åœ¨åœ°é¢ä¸Šæ—¶çš„é‡åŠ›ï¼Œä¸»è¦ç”¨äºæ–œå¡ï¼Œå»ºè®®å€¼-1.5 A constant downward velocity applied while grounded. Helps on slopes"), Range(0, -10f)]
                 public float groundForce = -1.5f;
 
-                [Tooltip("Íæ¼Ò´¹Ö±ËÙ¶ÈµÄ×î´óËÙ¶È£¬½¨ÒéÖµ40 The maximum vertiacl movement speed")]
+                [Tooltip("ç©å®¶å‚ç›´é€Ÿåº¦çš„æœ€å¤§é€Ÿåº¦ï¼Œå»ºè®®å€¼40 The maximum vertiacl movement speed")]
                 public float maxFallSpeed = 40f;
 
                 [Header("Jump")]
-                [Tooltip("Íæ¼ÒµÄÌøÔ¾Á¦£¬»áÓ°ÏìÌøÔ¾¸ß¶È,½¨ÒéÖµ36 The immediate vertical velocity applied when jumping")]
+                [Tooltip("ç©å®¶çš„è·³è·ƒåŠ›ï¼Œä¼šå½±å“è·³è·ƒé«˜åº¦,å»ºè®®å€¼36 The immediate vertical velocity applied when jumping")]
                 public float jumpPower = 36f;
 
-                [Tooltip("ÌøÔ¾»º³å£¬ÔÚµ½´ïÆ½Ì¨Ç°µÄÕâ¶ÎÊ±¼äÄÚ£¬Èç¹ûÍæ¼Ò°´ÏÂÌøÔ¾¼ü£¬ÔòÔÊĞí½ÇÉ«ÔÚÂäµØÖ®ºóÁ¢¿ÌÆğÌø£¬½¨ÒéÖµ0.12f The amount of time we buffer a jump. This allows jump input before actually hitting the ground")]
+                [Tooltip("è·³è·ƒç¼“å†²ï¼Œåœ¨åˆ°è¾¾å¹³å°å‰çš„è¿™æ®µæ—¶é—´å†…ï¼Œå¦‚æœç©å®¶æŒ‰ä¸‹è·³è·ƒé”®ï¼Œåˆ™å…è®¸è§’è‰²åœ¨è½åœ°ä¹‹åç«‹åˆ»èµ·è·³ï¼Œå»ºè®®å€¼0.12f The amount of time we buffer a jump. This allows jump input before actually hitting the ground")]
                 public float bufferJumpTime = 0.12f;
 
                 [Header("CollisionCheck")]
-                [Tooltip("µØÃæÓëÌì»¨°åµÄLayerMask")]
+                [Tooltip("åœ°é¢ä¸å¤©èŠ±æ¿çš„LayerMask")]
                 public LayerMask groundLayerMask;
 
-                [Tooltip("µØÃæÓëÌì»¨°åÅö×²¼ì²â¾àÀë£¬½¨ÒéÖµ0.05 The detection distance for ground and ceiling check"), Range(0f, 0.5f)]
+                [Tooltip("åœ°é¢ä¸å¤©èŠ±æ¿ç¢°æ’æ£€æµ‹è·ç¦»ï¼Œå»ºè®®å€¼0.05 The detection distance for ground and ceiling check"), Range(0f, 0.5f)]
                 public float groundCheckDistance = 0.05f;
 
-                [Tooltip("Åö×²Ìå¼ì²âÆ¤·ô¾àÀë£¬½¨ÒéÖµ0.05"), Range(0f, 0.1f)]
+                [Tooltip("ç¢°æ’ä½“æ£€æµ‹çš®è‚¤è·ç¦»ï¼Œå»ºè®®å€¼0.05"), Range(0f, 0.1f)]
                 public float skinDistance = 0.05f;
 
                 [Header("Horizontal")]
-                [Tooltip("Ë®Æ½ÔË¶¯µÄ×î´óËÙ¶È£¬½¨ÒéÖµ14 The top horizontal speed")]
+                [Tooltip("æ°´å¹³è¿åŠ¨çš„æœ€å¤§é€Ÿåº¦ï¼Œå»ºè®®å€¼14 The top horizontal speed")]
                 public float maxSpeed = 14f;
+
+
+                [Tooltip("æ°´å¹³è¿åŠ¨çš„åŠ é€Ÿçš„åŠ é€Ÿåº¦ï¼Œå»ºè®®å€¼ é©¬åŠ›æ¬§120 è”šè“200 The player's capacity to gain horizontal speed")]
+                public float acceleration = 200f;
+
+                [Tooltip("åœ°é¢æ°´å¹³è¿åŠ¨å‡é€Ÿçš„åŠ é€Ÿåº¦ï¼Œå»ºè®®å€¼ é©¬åŠ›æ¬§60 è”šè“200 The pace at which the player comes to a stop")]
+                public float groundDeceleration = 200f;
+
+                [Tooltip("ç©ºä¸­æ°´å¹³è¿åŠ¨å‡é€Ÿçš„åŠ é€Ÿåº¦ï¼Œå»ºè®®å€¼ é©¬åŠ›æ¬§30 è”šè“200 Deceleration in air only after stopping input mid-air")]
+                public float airDeceleration = 200f;
+
         }
 }
