@@ -5,24 +5,24 @@ using UnityEngine.InputSystem;
 
 namespace CoarisPlatformer2D {
         /// <summary>
-        /// CoarisµÄ2DÆ½Ì¨ÌøÔ¾£¬Íæ¼Ò½ÇÉ«¿ØÖÆÆ÷Ä£°åÀà
-        /// 14/Jan/2024 ¿ªÊ¼±àĞ´
-        ///             ½ÇÉ«µÄÖØÁ¦¡¢×óÓÒÒÆ¶¯ÊäÈë¡¢ÌøÔ¾ÊäÈë
+        /// Coarisçš„2Då¹³å°è·³è·ƒï¼Œç©å®¶è§’è‰²æ§åˆ¶å™¨æ¨¡æ¿ç±»
+        /// 14/Jan/2024 å¼€å§‹ç¼–å†™
+        ///             è§’è‰²çš„é‡åŠ›ã€å·¦å³ç§»åŠ¨è¾“å…¥ã€è·³è·ƒè¾“å…¥
         /// </summary>
 
-        //±¾½Å±¾ĞèÒª Rigidbody2D ÒÔ¼°ÖÁÉÙÈÎÒ»Ò»ÖÖ Collider2D ×é¼ş
+        //æœ¬è„šæœ¬éœ€è¦ Rigidbody2D ä»¥åŠè‡³å°‘ä»»ä¸€ä¸€ç§ Collider2D ç»„ä»¶
         [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 
         public class PlayerController : MonoBehaviour {
-                [SerializeField] PlayerData _data;//Íæ¼ÒµÄÔ¤ÉèÊı¾İ
+                [SerializeField] PlayerData _data;//ç©å®¶çš„é¢„è®¾æ•°æ®
 
                 Rigidbody2D _rb;
                 BoxCollider2D _col;
 
-                Vector2 _frameVelocity;//Ã¿Ö¡£¬ÔÚÒıÇæÖ´ĞĞÔË¶¯Ç°µÄËÙ¶È¼ÆËã¡£ÔÚÃ¿Ö¡Ö´ĞĞÔË¶¯Ç°£¬½«´ËÖµ¸³¸ø Rigidbody2D.velocity
-                bool _cachedQueriesStartInColliders;//´æ´¢ÏîÄ¿ÉèÖÃ£¬ÔÚÅö×²Ìå¼ì²âÊ±ĞèÒªÁÙÊ±¸ÄÎªfalse
+                Vector2 _frameVelocity;//æ¯å¸§ï¼Œåœ¨å¼•æ“æ‰§è¡Œè¿åŠ¨å‰çš„é€Ÿåº¦è®¡ç®—ã€‚åœ¨æ¯å¸§æ‰§è¡Œè¿åŠ¨å‰ï¼Œå°†æ­¤å€¼èµ‹ç»™ Rigidbody2D.velocity
+                bool _cachedQueriesStartInColliders;//å­˜å‚¨é¡¹ç›®è®¾ç½®ï¼Œåœ¨ç¢°æ’ä½“æ£€æµ‹æ—¶éœ€è¦ä¸´æ—¶æ”¹ä¸ºfalse
 
-                float _time;//ÓÎÏ·ÔËĞĞÊ±¼ä
+                float _time;//æ¸¸æˆè¿è¡Œæ—¶é—´
 
                 void Awake() {
                         _rb = GetComponent<Rigidbody2D>();
@@ -44,27 +44,27 @@ namespace CoarisPlatformer2D {
                         ApplyMovement();
                 }
 
-                #region Åö×²¼ì²â Collision
-                bool _grounded;//µ±Íæ¼ÒÔÚµØÃæÉÏÊ±£¬Îªtrue¡£µ±Íæ¼ÒÔÚ¿ÕÖĞÊ±£¬Îªfalse¡£
+                #region ç¢°æ’æ£€æµ‹ Collision
+                bool _grounded;//å½“ç©å®¶åœ¨åœ°é¢ä¸Šæ—¶ï¼Œä¸ºtrueã€‚å½“ç©å®¶åœ¨ç©ºä¸­æ—¶ï¼Œä¸ºfalseã€‚
 
                 bool _groundHit;
                 bool _ceilingHit;
                 void CheckCollisions() {
                         Physics2D.queriesStartInColliders = false;
 
-                        //µØÃæºÍÌì»¨°åÅö×²¼ì²â
+                        //åœ°é¢å’Œå¤©èŠ±æ¿ç¢°æ’æ£€æµ‹
                         _groundHit = Physics2D.BoxCast(_col.bounds.center, _col.bounds.size, 0f, Vector2.down, _data.groundCheckDistance, _data.groundLayerMask);
                         _ceilingHit = Physics2D.BoxCast(_col.bounds.center, _col.bounds.size, 0f, Vector2.up, _data.groundCheckDistance, _data.groundLayerMask);
 
-                        //½Ó´¥Ìì»¨°å
+                        //æ¥è§¦å¤©èŠ±æ¿
                         if (_ceilingHit) _frameVelocity.y = Mathf.Min(0, _frameVelocity.y);
 
-                        //½Ó´¥µØÃæ
+                        //æ¥è§¦åœ°é¢
                         if (!_grounded && _groundHit) {
                                 _grounded = true;
                                 _endJumpEarly = false;
                         }
-                        //Àë¿ªµØÃæ
+                        //ç¦»å¼€åœ°é¢
                         else if (_grounded && !_groundHit) {
                                 _grounded = false;
                         }
@@ -73,83 +73,85 @@ namespace CoarisPlatformer2D {
                 }
                 #endregion
 
-                #region ÖØÁ¦&ÌøÔ¾ Gravity&Jump
+                #region é‡åŠ›&è·³è·ƒ Gravity&Jump
 
-                float _inAirGravity;//ÖØÁ¦¼ÓËÙ¶È
-                bool _endJumpEarly;//¿ØÖÆĞ¡·ùÌøÔ¾¡£µ±½ÇÉ«ÔÚÌøÔ¾ÉÏÉı½×¶ÎÊ±£¬ÌáÇ°ËÉ¿ªÌøÔ¾¼ü£¬´ËÖµÎªtrue¡£
+                float _inAirGravity;//é‡åŠ›åŠ é€Ÿåº¦
+                bool _endJumpEarly;//æ§åˆ¶å°å¹…è·³è·ƒã€‚å½“è§’è‰²åœ¨è·³è·ƒä¸Šå‡é˜¶æ®µæ—¶ï¼Œæå‰æ¾å¼€è·³è·ƒé”®ï¼Œæ­¤å€¼ä¸ºtrueã€‚
 
-                bool _jumpPressed = false;//ÌøÔ¾°´¼üÊÇ·ñ±»°´ÏÂ´¥·¢¡£µ±Íæ¼Ò°´ÏÂÌøÔ¾¼üµÄË²¼äÎªtrue¡£µ±½ÇÉ«Ö´ĞĞÒ»´ÎÆğÌøºó£¬Á¢¿Ì»Ø¹éfalse¡£
-                float _timeJumpPressed;//Íæ¼Ò°´ÏÂÌøÔ¾¼üµÄÓÎÏ·Ê±¼ä£¬ÓÃÓÚ¼ÆËã BufferJump ºÍ CoyoteJump ÊÇ·ñ´¥·¢¡£
-                bool _jumpHolding = false;//ÌøÔ¾°´¼üÊÇ·ñ³ÖĞø±»°´×¡¡£µ±Íæ¼Ò°´ÏÂÌøÔ¾¼üË²¼äÎªtrue¡£µ±Íæ¼ÒËÉ¿ªÌøÔ¾¼üË²¼ä»Ø¹éfalse¡£
+                bool _jumpPressed = false;//è·³è·ƒæŒ‰é”®æ˜¯å¦è¢«æŒ‰ä¸‹è§¦å‘ã€‚å½“ç©å®¶æŒ‰ä¸‹è·³è·ƒé”®çš„ç¬é—´ä¸ºtrueã€‚å½“è§’è‰²æ‰§è¡Œä¸€æ¬¡èµ·è·³åï¼Œç«‹åˆ»å›å½’falseã€‚
+                float _timeJumpPressed;//ç©å®¶æŒ‰ä¸‹è·³è·ƒé”®çš„æ¸¸æˆæ—¶é—´ï¼Œç”¨äºè®¡ç®— BufferJump å’Œ CoyoteJump æ˜¯å¦è§¦å‘ã€‚
+                bool _jumpHolding = false;//è·³è·ƒæŒ‰é”®æ˜¯å¦æŒç»­è¢«æŒ‰ä½ã€‚å½“ç©å®¶æŒ‰ä¸‹è·³è·ƒé”®ç¬é—´ä¸ºtrueã€‚å½“ç©å®¶æ¾å¼€è·³è·ƒé”®ç¬é—´å›å½’falseã€‚
 
-                bool _hasBufferJump => _grounded && _time < _timeJumpPressed + _data.bufferJumpTime;//ÊÇ·ñ´¥·¢ÁËBufferJump¡£´¥·¢Ê±Îªtrue¡£
+                bool _hasBufferJump => _grounded && _time < _timeJumpPressed + _data.bufferJumpTime;//æ˜¯å¦è§¦å‘äº†BufferJumpã€‚è§¦å‘æ—¶ä¸ºtrueã€‚
 
-                //ÌøÔ¾Ô¤´¦Àí£¬°üÀ¨ÍÁÀÇÊ±¼äµÈµÈ
+                //è·³è·ƒé¢„å¤„ç†ï¼ŒåŒ…æ‹¬åœŸç‹¼æ—¶é—´ç­‰ç­‰
                 void HandleJump() {
-                        if (!_endJumpEarly && !_grounded && !_jumpHolding && _rb.velocity.y > 0) _endJumpEarly = true;//ÔÚÂú×ãÕâĞ©Ìõ¼şÊ±£¬ÌáÇ°ËÉ¿ªÌøÔ¾¼ü£¬´¥·¢°«Ìø
+                        if (!_endJumpEarly && !_grounded && !_jumpHolding && _rb.velocity.y > 0) _endJumpEarly = true;//åœ¨æ»¡è¶³è¿™äº›æ¡ä»¶æ—¶ï¼Œæå‰æ¾å¼€è·³è·ƒé”®ï¼Œè§¦å‘çŸ®è·³
 
                         if (!_jumpPressed || !_hasBufferJump) return;
                         if (_grounded) ExecuteJump();
                         _jumpPressed = false;
                 }
-                //Ö´ĞĞÌøÔ¾
+                //æ‰§è¡Œè·³è·ƒ
                 void ExecuteJump() {
                         _endJumpEarly = false;
                         _frameVelocity.y = _data.jumpPower;
                 }
 
-                //´¦ÀíÖØÁ¦
+                //å¤„ç†é‡åŠ›
                 void HandleGravity() {
                         if (_grounded && _frameVelocity.y <= 0) {
                                 _frameVelocity.y = _data.groundForce;
                         }
                         else {
-                                _inAirGravity = _data.fallAcceleration;//ÖØÁ¦
-                                if (_endJumpEarly && _frameVelocity.y > 0) _inAirGravity *= _data.jumpEndEarlyGravityMuldifier;//ÔÚÌøÔ¾ÉÏÉı½×¶ÎÊ±ÌáÇ°ËÉ¿ªÌøÔ¾¼ü£¬ÖØÁ¦½«±äÎªÔ­À´µÄn±¶¡£
+                                _inAirGravity = _data.fallAcceleration;//é‡åŠ›
+                                if (_endJumpEarly && _frameVelocity.y > 0) _inAirGravity *= _data.jumpEndEarlyGravityMuldifier;//åœ¨è·³è·ƒä¸Šå‡é˜¶æ®µæ—¶æå‰æ¾å¼€è·³è·ƒé”®ï¼Œé‡åŠ›å°†å˜ä¸ºåŸæ¥çš„nå€ã€‚
                                 _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -_data.maxFallSpeed, _inAirGravity * Time.fixedDeltaTime);
                         }
                 }
 
-                //InputSystem ÌøÔ¾ÊäÈë
+                //InputSystem è·³è·ƒè¾“å…¥
                 public void OnJump(InputAction.CallbackContext context) {
-                        //°´ÏÂÌøÔ¾¼ü
+                        //æŒ‰ä¸‹è·³è·ƒé”®
                         if (context.phase == InputActionPhase.Started) {
                                 _jumpPressed = true;
                                 _jumpHolding = true;
                                 _timeJumpPressed = _time;
                         }
-                        //ËÉ¿ªÌøÔ¾¼ü
+                        //æ¾å¼€è·³è·ƒé”®
                         if (context.phase == InputActionPhase.Canceled) {
                                 _jumpHolding = false;
                         }
                 }
                 #endregion
 
-                #region Ë®Æ½ÔË¶¯ Horizontal
+                #region æ°´å¹³è¿åŠ¨ Horizontal
+
                 
                 Vector2 _frameMoveInput;
                 float _deceleration;
 
                 void HandleHorizontal() {
-                        //µ±Íæ¼ÒÃ»ÓĞË®Æ½ÊäÈëÊ±
+                        //å½“ç©å®¶æ²¡æœ‰æ°´å¹³è¾“å…¥æ—¶
                         if (_frameMoveInput.x == 0) {
                                 _deceleration = _grounded ? _data.groundDeceleration : _data.airDeceleration;
                                 _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, 0, _deceleration * Time.fixedDeltaTime);
                         }
-                        //µ±Íæ¼ÒÓĞË®Æ½ÊäÈëÊ±
+                        //å½“ç©å®¶æœ‰æ°´å¹³è¾“å…¥æ—¶
                         else {
                                 _frameVelocity.x = Mathf.MoveTowards(_frameVelocity.x, _frameMoveInput.x * _data.maxSpeed, _data.acceleration * Time.fixedDeltaTime);
                         }
                 }
-                //InputSystem Ë®Æ½ÊäÈë
+                //InputSystem æ°´å¹³è¾“å…¥
                 public void OnMove(InputAction.CallbackContext context) {
                         _frameMoveInput = context.ReadValue<Vector2>();
                 }
 
 
+
                 #endregion
 
-                //½«Ã¿Ö¡µÄÔË¶¯ËÙ¶ÈµÄÔ¤¼ÆËãÖ´ĞĞ
+                //å°†æ¯å¸§çš„è¿åŠ¨é€Ÿåº¦çš„é¢„è®¡ç®—æ‰§è¡Œ
                 void ApplyMovement() => _rb.velocity = _frameVelocity;
         }
 }
