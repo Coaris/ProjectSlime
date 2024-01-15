@@ -13,3 +13,14 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   fallAcceleration: 110
+  jumpEndEarlyGravityMuldifier: 3
+  groundForce: -1.5
+  maxFallSpeed: 40
+  jumpPower: 36
+  bufferJumpTime: 0.12
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
+  groundCheckDistance: 0.05
+  skinDistance: 0.05
+  maxSpeed: 14
