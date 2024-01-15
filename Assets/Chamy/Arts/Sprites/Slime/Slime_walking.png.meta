@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a6381e6d74ea6ac418f70447ea63608e
+guid: 87355015b825a6b43950335cb0152239
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,190 +110,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tilemap_stone_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 140
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 609b3bd52e35f7243873fe3cc1b74ad6
-      internalID: -1663164753
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_stone_1
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 140
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5a1430927a897d04794113f8eaa167b9
-      internalID: -172466069
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_stone_2
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 140
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8924e27418291e84ead5bddf34aa210a
-      internalID: -1314723188
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_stone_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 10fdacefb08a0524db5c1e75259bc33e
-      internalID: 1235828997
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_stone_4
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fa04a8f0e17895d4988b267e060fefec
-      internalID: 1811147120
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_stone_5
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 52a1b807c264d9d49a5ec297a220fa4f
-      internalID: 990144746
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilemap_stone_6
+      name: Slime_walking_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 70
+        width: 128
         height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80354d4c7759dcc4a9e2ada0523f9d84
-      internalID: 1497433936
+      spriteID: 500e4d9f3ac6c33418a1eb67f9778ff8
+      internalID: 371866912
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap_stone_7
+      name: Slime_walking_1
       rect:
         serializedVersion: 2
-        x: 70
+        x: 128
         y: 0
-        width: 70
+        width: 128
         height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec08e572c66e6fe45857821525168a39
-      internalID: 845063225
+      spriteID: 412b37140375a3d40aaf9d4064e91bfe
+      internalID: 1240169586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilemap_stone_8
+      name: Slime_walking_2
       rect:
         serializedVersion: 2
-        x: 140
+        x: 256
         y: 0
-        width: 70
+        width: 128
         height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68f8f777bf1a6924495c13b0366d9c96
-      internalID: 753102210
+      spriteID: eacb6b9efbb1f7549948412c959aec04
+      internalID: 2051433605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slime_walking_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 70
+      alignment: 9
+      pivot: {x: 0.5, y: 0.12}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4604bb8ac7a25643a30902f0168f9ef
+      internalID: -1502454678
       vertices: []
       indices: 
       edges: []
@@ -309,15 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tilemap_stone_0: -1663164753
-      Tilemap_stone_1: -172466069
-      Tilemap_stone_2: -1314723188
-      Tilemap_stone_3: 1235828997
-      Tilemap_stone_4: 1811147120
-      Tilemap_stone_5: 990144746
-      Tilemap_stone_6: 1497433936
-      Tilemap_stone_7: 845063225
-      Tilemap_stone_8: 753102210
+      Slime_walking_0: 371866912
+      Slime_walking_1: 1240169586
+      Slime_walking_2: 2051433605
+      Slime_walking_3: -1502454678
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
