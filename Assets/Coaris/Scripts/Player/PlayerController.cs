@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 namespace CoarisPlatformer2D {
         /// <summary>
@@ -45,7 +46,7 @@ namespace CoarisPlatformer2D {
                 }
 
                 #region 碰撞检测 Collision
-                bool _grounded;//当玩家在地面上时，为true。当玩家在空中时，为false。
+                public bool _grounded;//当玩家在地面上时，为true。当玩家在空中时，为false。
 
                 bool _groundHit;
                 bool _ceilingHit;
@@ -64,6 +65,7 @@ namespace CoarisPlatformer2D {
                                 _grounded = true;
                                 _endJumpEarly = false;
                                 _coyoteUsable = true;
+                                OnGrounded?.Invoke();
                         }
                         //离开地面
                         else if (_grounded && !_groundHit) {
@@ -80,6 +82,9 @@ namespace CoarisPlatformer2D {
                 float _inAirGravity;//重力加速度
                 bool _endJumpEarly;//控制小幅跳跃。当角色在跳跃上升阶段时，提前松开跳跃键，此值为true。
 
+                public event Action OnJumped;//当跳跃成功触发时，触发该事件，让其他脚本收到跳跃的通知，例如动画脚本。
+                public event Action OnFalling;//当角色在空中下降时，触发该事件，让其他脚本收到下落的通知，例如动画脚本。
+                public event Action OnGrounded;//当角色着陆时，触发该事件，让其他脚本收到着陆的通知，例如动画脚本。
                 bool _jumpPressed = false;//跳跃按键是否被按下触发。当玩家按下跳跃键的瞬间为true。当角色执行一次起跳后，立刻回归false。
                 float _timeJumpPressed;//玩家按下跳跃键的游戏时间，用于计算 BufferJump 和 CoyoteJump 是否触发。
                 float _timeLeftGround = float.MinValue;//角色离开平台的游戏时间，用于CoyoteJump触发的计算。
@@ -94,6 +99,7 @@ namespace CoarisPlatformer2D {
                 void HandleJump() {
                         if (!_endJumpEarly && !_grounded && !_jumpHolding && _rb.velocity.y > 0) _endJumpEarly = true;//在满足这些条件时，提前松开跳跃键，触发矮跳
 
+                        if (!_grounded && _coyoteUsable && _time > _timeLeftGround + _data.coyoteTime) _coyoteUsable = false;
                         if (!_jumpPressed && !_hasBufferJump) return;
                         if (_grounded || _hasCoyoteJump) ExecuteJump();
                         _jumpPressed = false;
@@ -103,6 +109,7 @@ namespace CoarisPlatformer2D {
                         _coyoteUsable = false;
                         _endJumpEarly = false;
                         _frameVelocity.y = _data.jumpPower;
+                        OnJumped?.Invoke();
                 }
 
                 //处理重力
@@ -114,6 +121,7 @@ namespace CoarisPlatformer2D {
                                 _inAirGravity = _data.fallAcceleration;//重力
                                 if (_endJumpEarly && _frameVelocity.y > 0) _inAirGravity *= _data.jumpEndEarlyGravityMuldifier;//在跳跃上升阶段时提前松开跳跃键，重力将变为原来的n倍。
                                 _frameVelocity.y = Mathf.MoveTowards(_frameVelocity.y, -_data.maxFallSpeed, _inAirGravity * Time.fixedDeltaTime);
+                                if (!_grounded && !_coyoteUsable && _frameVelocity.y < 0) OnFalling?.Invoke();
                         }
                 }
 
@@ -135,7 +143,7 @@ namespace CoarisPlatformer2D {
                 #region 水平运动 Horizontal
 
 
-                Vector2 _frameMoveInput;
+                public Vector2 _frameMoveInput;
                 float _deceleration;
 
                 void HandleHorizontal() {
