@@ -32,7 +32,7 @@ namespace CoarisPlatformer2D {
 
                 //控制角色左右朝向
                 void HandleSpriteDirection() {
-                        if (_player._frameMoveInput.x != 0) _sprite.flipX = _player._frameMoveInput.x < 0;
+                        _sprite.flipX = _player._isFacingLeft;
                 }
                 //控制角色行走的动画切换
                 void HandleWalkingAnim() {
