@@ -18,12 +18,12 @@ MonoBehaviour:
   maxFallSpeed: 15
   airFloat: 0
   maxFloatFallSpeed: 2.5
-  jumpPower: 20
+  jumpPower: 22
   bufferJumpTime: 0.12
   coyoteTime: 0.07
-  airJump: 1
+  airJump: 0
   maxAirJump: 1
-  dash: 1
+  dash: 0
   dashTime: 0.25
   dashCD: 0.2
   dashSpeed: 20
