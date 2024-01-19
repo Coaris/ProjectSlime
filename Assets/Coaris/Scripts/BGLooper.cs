@@ -9,7 +9,7 @@ public class BGLooper : MonoBehaviour {
 
         [SerializeField] Sprite bgImage;
         [SerializeField] [Tooltip("背景图水平移动的速度，1为跟随相机移动,值越小移动越快"), Range(0, 1)] float xFactor = 1;
-        [SerializeField] [Tooltip("背景图垂直移动的速度，1为跟随相机移动，值越小移动越快"), Range(0, 1)] float yFactor = 1;
+        //[SerializeField] [Tooltip("背景图垂直移动的速度，1为跟随相机移动，值越小移动越快"), Range(0, 1)] float yFactor = 1;
 
         Vector3 framePosition;
         Vector3 tempPos;
@@ -18,12 +18,14 @@ public class BGLooper : MonoBehaviour {
 
         void Awake() {
                 mainCamera = Camera.main.transform;
+                GetComponent<SpriteRenderer>().enabled = false;
                 Transform[] children = GetComponentsInChildren<Transform>();
                 foreach (Transform child in children) {
                         if (child != transform) {
                                 bgList.Add(child);
                         }
                 }
+                framePosition.y = transform.position.y;
                 if (bgImage != null) SetNewImage(bgImage);
         }
 
@@ -56,7 +58,7 @@ public class BGLooper : MonoBehaviour {
         //BGLooper跟随相机
         void FollowCamera() {
                 framePosition.x = mainCamera.position.x * xFactor;
-                framePosition.y = mainCamera.position.y * yFactor;
+                //framePosition.y = mainCamera.position.y * yFactor;
                 transform.position = framePosition;
         }
         //循环背景图片
