@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6b1be7a2bd0869e44bec707471972d32
+guid: 88e05c8ba21cbb24581c863005e1e534
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,127 +110,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rule_tile_0
+      name: slime_englobe_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 298
+        width: 170
+        height: 149
+      alignment: 9
+      pivot: {x: 0.25, y: 0.045}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d708c9de2fec1cd42a420491f07b579b
-      internalID: -594610650
+      spriteID: 16a7cf5f3e1223d46b426434c536220a
+      internalID: 1411790044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rule_tile_1
+      name: slime_englobe_1
       rect:
         serializedVersion: 2
-        x: 70
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 170
+        y: 298
+        width: 170
+        height: 149
+      alignment: 9
+      pivot: {x: 0.25, y: 0.045}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4498ba6356f062949944fae8b043f7ec
-      internalID: 189444863
+      spriteID: bfa384d2726bf50449b1019424194838
+      internalID: -1917169922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rule_tile_2
+      name: slime_englobe_2
       rect:
         serializedVersion: 2
-        x: 140
-        y: 70
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 340
+        y: 298
+        width: 170
+        height: 149
+      alignment: 9
+      pivot: {x: 0.25, y: 0.045}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18b2c7db66f71624893d95d052a18eb2
-      internalID: 1549984942
+      spriteID: 0f30ab860ddcbaf45a3befc53647b2fe
+      internalID: -1105049630
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rule_tile_3
+      name: slime_englobe_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 149
+        width: 170
+        height: 149
+      alignment: 9
+      pivot: {x: 0.25, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4415c27a4ffe78644a730e01d2df934f
+      internalID: 91393785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_englobe_4
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 149
+        width: 170
+        height: 149
+      alignment: 9
+      pivot: {x: 0.25, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0779e9e25882044fb01bb5a0ba30d0c
+      internalID: -366186925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_englobe_5
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 149
+        width: 170
+        height: 149
+      alignment: 9
+      pivot: {x: 0.25, y: 0.045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1a7ec0c6f15d0146b4b60a8173c3acd
+      internalID: -1771084746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slime_englobe_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 170
+        height: 149
+      alignment: 9
+      pivot: {x: 0.25, y: 0.045}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60e30f150d8bb5d46b2c63967166d9b5
-      internalID: 1273425127
+      spriteID: f81723792628ff84cbb161590359f2ce
+      internalID: -571922067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rule_tile_4
+      name: slime_englobe_7
       rect:
         serializedVersion: 2
-        x: 70
+        x: 170
         y: 0
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 170
+        height: 149
+      alignment: 9
+      pivot: {x: 0.25, y: 0.045}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df09bb97cd373354587ece7b2c39ccb6
-      internalID: 1689391670
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rule_tile_5
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 0
-        width: 70
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ed7d1ea677c18b047a5e15f5805df383
-      internalID: -2094391398
+      spriteID: 34ddf82e81de784489130d65d0a07336
+      internalID: -1014798494
       vertices: []
       indices: 
       edges: []
@@ -246,12 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Rule_tile_0: -594610650
-      Rule_tile_1: 189444863
-      Rule_tile_2: 1549984942
-      Rule_tile_3: 1273425127
-      Rule_tile_4: 1689391670
-      Rule_tile_5: -2094391398
+      slime_englobe_0: 1411790044
+      slime_englobe_1: -1917169922
+      slime_englobe_2: -1105049630
+      slime_englobe_3: 91393785
+      slime_englobe_4: -366186925
+      slime_englobe_5: -1771084746
+      slime_englobe_6: -571922067
+      slime_englobe_7: -1014798494
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
