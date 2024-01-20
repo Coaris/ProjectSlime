@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-namespace CoarisPlatformer2D {
+namespace Player {
         /// <summary>
         /// Coaris的2D平台跳跃，玩家角色控制器模板类
         /// 14/Jan/2024 开始编写
@@ -32,12 +32,18 @@ namespace CoarisPlatformer2D {
                         _playerActionEnd = transform.GetChild(0).GetChild(0).GetComponent<PlayerActionsEnd>();
 
                         _cachedQueriesStartInColliders = Physics2D.queriesStartInColliders;
+
+                        _data.airFloat = false;
+                        _data.airJump = false;
+                        _data.dash = false;
                 }
                 void OnEnable() {
                         _playerActionEnd.OnEnglobed += OnEnglobed;
+                        _playerActionEnd.OnGetAbility += OnGetAbility;
                 }
                 void OnDisable() {
                         _playerActionEnd.OnEnglobed -= OnEnglobed;
+                        _playerActionEnd.OnGetAbility -= OnGetAbility;
                 }
                 void Update() {
                         _time += Time.deltaTime;
@@ -52,6 +58,16 @@ namespace CoarisPlatformer2D {
                         HandleGravity();
 
                         ApplyMovement();
+                }
+                void OnTriggerEnter2D(Collider2D collision) {
+                        if (collision.GetComponent<NPC_Base>() != null) {
+                                npcTouching = collision.gameObject;
+                        }
+                }
+                void OnTriggerExit2D(Collider2D collision) {
+                        if (collision.GetComponent<NPC_Base>() != null) {
+                                npcTouching = null;
+                        }
                 }
 
                 #region 碰撞检测 Collision
@@ -228,16 +244,39 @@ namespace CoarisPlatformer2D {
 
                 #region 吞噬 Englobe
                 public event Action OnEnglobing;
+                GameObject npcTouching;
                 bool _isEating;
+
+                public GameObject GetTouchingNPC() {
+                        return npcTouching;
+                }
+
                 public void OnEnglobe(InputAction.CallbackContext context) {
-                        if (_isDashing) return;
+                        if (_isDashing || npcTouching == null) return;
                         if (_grounded && context.phase == InputActionPhase.Started) {
                                 _isEating = true;
                                 OnEnglobing?.Invoke();
                         }
                 }
-                public void OnEnglobed() {
+                void OnEnglobed() {
                         _isEating = false;
+                }
+                void OnGetAbility() {
+                        if (npcTouching != null) {
+                                foreach (Ability i in npcTouching.GetComponent<NPC_Base>().GetAbilityList()) {
+                                        switch (i) {
+                                                case Ability.AirJump:
+                                                        _data.airJump = true;
+                                                        break;
+                                                case Ability.AirFloat:
+                                                        _data.airFloat = true;
+                                                        break;
+                                                case Ability.Dash:
+                                                        _data.dash = true;
+                                                        break;
+                                        }
+                                }
+                        }
                 }
                 #endregion
 

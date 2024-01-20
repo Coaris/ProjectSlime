@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CoarisPlatformer2D {
+namespace Player {
         public class PlayerVisual : MonoBehaviour {
                 PlayerController _player;
                 PlayerActionsEnd _playerActionEnd;
