@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CoarisPlatformer2D {
+namespace Player {
         [CreateAssetMenu(menuName = "PlayerData")]//可以在编辑器中创建PlayerData的预设体
         public class PlayerData : ScriptableObject {
                 [Header("重力 / Gravity")]
