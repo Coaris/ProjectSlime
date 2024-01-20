@@ -19,6 +19,7 @@ namespace CoarisPlatformer2D {
 
                 Rigidbody2D _rb;
                 BoxCollider2D _col;
+                PlayerActionsEnd _playerActionEnd;
 
                 Vector2 _frameVelocity;//每帧，在引擎执行运动前的速度计算。在每帧执行运动前，将此值赋给 Rigidbody2D.velocity
                 bool _cachedQueriesStartInColliders;//存储项目设置，在碰撞体检测时需要临时改为false
@@ -28,8 +29,15 @@ namespace CoarisPlatformer2D {
                 void Awake() {
                         _rb = GetComponent<Rigidbody2D>();
                         _col = GetComponent<BoxCollider2D>();
+                        _playerActionEnd = transform.GetChild(0).GetChild(0).GetComponent<PlayerActionsEnd>();
 
                         _cachedQueriesStartInColliders = Physics2D.queriesStartInColliders;
+                }
+                void OnEnable() {
+                        _playerActionEnd.OnEnglobed += OnEnglobed;
+                }
+                void OnDisable() {
+                        _playerActionEnd.OnEnglobed -= OnEnglobed;
                 }
                 void Update() {
                         _time += Time.deltaTime;
@@ -127,7 +135,7 @@ namespace CoarisPlatformer2D {
 
                 //InputSystem 跳跃输入
                 public void OnJump(InputAction.CallbackContext context) {
-                        if (_isDashing) return;
+                        if (_isDashing || _isEating) return;
                         //按下跳跃键
                         if (context.phase == InputActionPhase.Started) {
                                 _endJumpEarly = false;
@@ -160,6 +168,7 @@ namespace CoarisPlatformer2D {
                 }
                 //InputSystem 冲刺输入
                 public void OnDash(InputAction.CallbackContext context) {
+                        if (_isEating) return;
                         if (_data.dash && _dashUsable && context.phase == InputActionPhase.Started) {
                                 _isDashing = true;
                                 _dashUsable = false;
@@ -198,7 +207,7 @@ namespace CoarisPlatformer2D {
                 float _deceleration;
 
                 void HandleHorizontal() {
-                        if (_isDashing) return;
+                        //if (_isDashing || _isEating) return;
                         //当玩家没有水平输入时
                         if (_frameMoveInput.x == 0) {
                                 _deceleration = _grounded ? _data.groundDeceleration : _data.airDeceleration;
@@ -212,10 +221,25 @@ namespace CoarisPlatformer2D {
                 }
                 //InputSystem 水平输入
                 public void OnMove(InputAction.CallbackContext context) {
+                        if (_isDashing || _isEating) return;
                         _frameMoveInput = context.ReadValue<Vector2>();
                 }
                 #endregion
 
+                #region 吞噬 Englobe
+                public event Action OnEnglobing;
+                bool _isEating;
+                public void OnEnglobe(InputAction.CallbackContext context) {
+                        if (_isDashing) return;
+                        if (_grounded && context.phase == InputActionPhase.Started) {
+                                _isEating = true;
+                                OnEnglobing?.Invoke();
+                        }
+                }
+                public void OnEnglobed() {
+                        _isEating = false;
+                }
+                #endregion
 
                 //将每帧的运动速度的预计算执行
                 void ApplyMovement() => _rb.velocity = _frameVelocity;

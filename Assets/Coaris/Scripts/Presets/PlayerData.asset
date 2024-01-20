@@ -17,14 +17,14 @@ MonoBehaviour:
   groundForce: -1.5
   maxFallSpeed: 15
   airFloat: 0
-  maxFloatFallSpeed: 2.5
-  jumpPower: 22
+  maxFloatFallSpeed: 2
+  jumpPower: 21.5
   bufferJumpTime: 0.12
   coyoteTime: 0.07
-  airJump: 0
+  airJump: 1
   maxAirJump: 1
-  dash: 0
-  dashTime: 0.25
+  dash: 1
+  dashTime: 0.2
   dashCD: 0.2
   dashSpeed: 20
   groundLayerMask:

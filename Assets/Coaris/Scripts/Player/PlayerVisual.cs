@@ -5,6 +5,7 @@ using UnityEngine;
 namespace CoarisPlatformer2D {
         public class PlayerVisual : MonoBehaviour {
                 PlayerController _player;
+                PlayerActionsEnd _playerActionEnd;
                 Animator _anim;
                 SpriteRenderer _sprite;
 
@@ -12,16 +13,21 @@ namespace CoarisPlatformer2D {
                         _player = GetComponentInParent<PlayerController>();
                         _anim = GetComponentInChildren<Animator>();
                         _sprite = GetComponentInChildren<SpriteRenderer>();
+                        _playerActionEnd = GetComponentInChildren<PlayerActionsEnd>();
                 }
                 void OnEnable() {
                         _player.OnJumped += OnJumped;
                         _player.OnFalling += OnFalling;
                         _player.OnGrounded += OnGrounded;
+                        _player.OnEnglobing += OnEnglobing;
+                        _playerActionEnd.OnEnglobed += OnEnglobed;
                 }
                 void OnDisable() {
                         _player.OnJumped -= OnJumped;
                         _player.OnFalling -= OnFalling;
                         _player.OnGrounded -= OnGrounded;
+                        _player.OnEnglobing -= OnEnglobing;
+                        _playerActionEnd.OnEnglobed -= OnEnglobed;
                 }
                 void Update() {
                         if (_player == null) return;
@@ -55,10 +61,17 @@ namespace CoarisPlatformer2D {
                         _anim.SetBool(FallingKey, false);
                         _anim.SetBool(GroundedKey, true);
                 }
+                void OnEnglobing() {
+                        _anim.SetBool(EatKey, true);
+                }
+                void OnEnglobed() {
+                        _anim.SetBool(EatKey, false);
+                }
 
                 static readonly int JumpingKey = Animator.StringToHash("Jumping");
                 static readonly int FallingKey = Animator.StringToHash("Falling");
                 static readonly int GroundedKey = Animator.StringToHash("Grounded");
                 static readonly int SpeedKey = Animator.StringToHash("Speed");
+                static readonly int EatKey = Animator.StringToHash("Eat");
         }
 }
