@@ -5,12 +5,6 @@ using UnityEngine.InputSystem;
 using System;
 
 namespace Player {
-        /// <summary>
-        /// Coaris的2D平台跳跃，玩家角色控制器模板类
-        /// 14/Jan/2024 开始编写
-        ///             角色的重力、左右移动输入、跳跃输入
-        /// </summary>
-
         //本脚本需要 Rigidbody2D 以及至少任一一种 Collider2D 组件
         [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 
@@ -20,15 +14,19 @@ namespace Player {
                 Rigidbody2D _rb;
                 BoxCollider2D _col;
                 PlayerActionsEnd _playerActionEnd;
+                PlayerLiquid _playerLiquid;
 
                 Vector2 _frameVelocity;//每帧，在引擎执行运动前的速度计算。在每帧执行运动前，将此值赋给 Rigidbody2D.velocity
                 bool _cachedQueriesStartInColliders;//存储项目设置，在碰撞体检测时需要临时改为false
 
                 float _time;//游戏运行时间
 
+                public bool _isInWater;
+
                 void Awake() {
                         _rb = GetComponent<Rigidbody2D>();
                         _col = GetComponent<BoxCollider2D>();
+                        _playerLiquid = GetComponent<PlayerLiquid>();
                         _playerActionEnd = transform.GetChild(0).GetChild(0).GetComponent<PlayerActionsEnd>();
 
                         _cachedQueriesStartInColliders = Physics2D.queriesStartInColliders;
@@ -38,11 +36,11 @@ namespace Player {
                         _data.dash = false;
                 }
                 void OnEnable() {
-                        _playerActionEnd.OnEnglobed += OnEnglobed;
+                        _playerActionEnd.OnAbsorbed += OnAbsorbed;
                         _playerActionEnd.OnGetAbility += OnGetAbility;
                 }
                 void OnDisable() {
-                        _playerActionEnd.OnEnglobed -= OnEnglobed;
+                        _playerActionEnd.OnAbsorbed -= OnAbsorbed;
                         _playerActionEnd.OnGetAbility -= OnGetAbility;
                 }
                 void Update() {
@@ -63,10 +61,16 @@ namespace Player {
                         if (collision.GetComponent<NPC_Base>() != null) {
                                 npcTouching = collision.gameObject;
                         }
+                        if (collision.tag == "Water") {
+                                _isInWater = true;
+                        }
                 }
                 void OnTriggerExit2D(Collider2D collision) {
                         if (collision.GetComponent<NPC_Base>() != null) {
                                 npcTouching = null;
+                        }
+                        if (collision.tag == "Water") {
+                                _isInWater = false;
                         }
                 }
 
@@ -168,7 +172,7 @@ namespace Player {
 
                 #region 冲刺 Dash
 
-                bool _isDashing = false;
+                public bool _isDashing = false;
                 float _timeDashPressed = float.MinValue;
                 bool _isDashEnd => _isDashing && _time > _timeDashPressed + _data.dashTime;
                 bool _dashUsable = true;
@@ -242,23 +246,25 @@ namespace Player {
                 }
                 #endregion
 
-                #region 吞噬 Englobe
-                public event Action OnEnglobing;
+                #region 吞噬 Absorb
+                public event Action OnAbsorbing;
                 GameObject npcTouching;
                 bool _isEating;
+
+                public List<NPC_Type> npcTypeList = new List<NPC_Type>();
 
                 public GameObject GetTouchingNPC() {
                         return npcTouching;
                 }
 
-                public void OnEnglobe(InputAction.CallbackContext context) {
+                public void OnAbsorb(InputAction.CallbackContext context) {
                         if (_isDashing || npcTouching == null) return;
                         if (_grounded && context.phase == InputActionPhase.Started) {
                                 _isEating = true;
-                                OnEnglobing?.Invoke();
+                                OnAbsorbing?.Invoke();
                         }
                 }
-                void OnEnglobed() {
+                void OnAbsorbed() {
                         _isEating = false;
                 }
                 void OnGetAbility() {
@@ -276,6 +282,8 @@ namespace Player {
                                                         break;
                                         }
                                 }
+                                npcTypeList.Add(npcTouching.GetComponent<NPC_Base>().GetNPCType());
+                                _playerLiquid.ChangeMaxWaterValue(npcTypeList.Count);
                         }
                 }
                 #endregion

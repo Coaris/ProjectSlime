@@ -8,12 +8,12 @@ namespace Player {
                 public event Action OnGetAbility;
                 PlayerController _player;
 
-                public event Action OnEnglobed;
+                public event Action OnAbsorbed;
                 void Awake() {
                         _player = transform.parent.parent.GetComponent<PlayerController>();
                 }
-                public void OnEnglobeEnd() {
-                        OnEnglobed?.Invoke();
+                public void OnAbsorbEnd() {
+                        OnAbsorbed?.Invoke();
                 }
                 public void OnEatNPC() {
                         OnGetAbility?.Invoke();
