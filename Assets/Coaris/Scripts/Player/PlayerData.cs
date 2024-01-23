@@ -77,5 +77,13 @@ namespace Player {
                 [Tooltip("空中水平运动减速的加速度，建议值 马力欧30 蔚蓝200 Deceleration in air only after stopping input mid-air")]
                 public float airDeceleration = 200f;
 
+                [Header("液体系统 / Liquid System"), Tooltip("在有玩家输入时，每秒减少的水量")]
+                public float waterLossPerSecond = 1f;
+
+                [Tooltip("每秒补水速度")]
+                public float waterGetPerSecond = 10;
+
+                [Tooltip("每种能力的液体占用值")]
+                public int liquidValueEachAbility = 20;
         }
 }

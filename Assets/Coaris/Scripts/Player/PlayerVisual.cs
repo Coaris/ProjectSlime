@@ -19,15 +19,15 @@ namespace Player {
                         _player.OnJumped += OnJumped;
                         _player.OnFalling += OnFalling;
                         _player.OnGrounded += OnGrounded;
-                        _player.OnEnglobing += OnEnglobing;
-                        _playerActionEnd.OnEnglobed += OnEnglobed;
+                        _player.OnAbsorbing += OnAbsorbing;
+                        _playerActionEnd.OnAbsorbed += OnAbsorbed;
                 }
                 void OnDisable() {
                         _player.OnJumped -= OnJumped;
                         _player.OnFalling -= OnFalling;
                         _player.OnGrounded -= OnGrounded;
-                        _player.OnEnglobing -= OnEnglobing;
-                        _playerActionEnd.OnEnglobed -= OnEnglobed;
+                        _player.OnAbsorbing -= OnAbsorbing;
+                        _playerActionEnd.OnAbsorbed -= OnAbsorbed;
                 }
                 void Update() {
                         if (_player == null) return;
@@ -61,10 +61,10 @@ namespace Player {
                         _anim.SetBool(FallingKey, false);
                         _anim.SetBool(GroundedKey, true);
                 }
-                void OnEnglobing() {
+                void OnAbsorbing() {
                         _anim.SetBool(EatKey, true);
                 }
-                void OnEnglobed() {
+                void OnAbsorbed() {
                         _anim.SetBool(EatKey, false);
                 }
 

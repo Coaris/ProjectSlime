@@ -36,3 +36,5 @@ MonoBehaviour:
   acceleration: 200
   groundDeceleration: 200
   airDeceleration: 200
+  waterLossPerSecond: 5
+  waterGetPerSecond: 20
